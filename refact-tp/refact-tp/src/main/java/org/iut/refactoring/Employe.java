@@ -15,6 +15,7 @@ public class Employe{
     private final double salaireBase;
     private int experience;
     private final String equipe;
+    private CalculSalaireAbs methodeCalculeSalaire;
 
     public Employe(String id, String type, String nom, double salaireBase, int experience, String equipe){
         this.id = id;
@@ -49,5 +50,13 @@ public class Employe{
     }
     public void setExperience(int experience){
         this.experience = experience;
+    }
+
+    public void setCalculSalaire(CalculSalaireAbs calculSalaire){
+        this.methodeCalculeSalaire = calculSalaire;
+    }
+
+    public CalculSalaireAbs getCalculSalaire(){
+        return methodeCalculeSalaire;
     }
 }

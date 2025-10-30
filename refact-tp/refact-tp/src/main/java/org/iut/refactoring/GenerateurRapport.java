@@ -14,15 +14,15 @@ public class GenerateurRapport {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
 
         switch (typeRapport) {
-            case SALAIRE -> {
+            case SALAIRE ->
                 generationRapportSalaire(filtre, gest);
-            }
-            case EXPERIENCE -> {
+
+            case EXPERIENCE ->
                 generationRapportExperience(filtre, gest);
-            }
-            case DIVISION -> {
-                generationRapportDivision(filtre, gest);
-            }
+
+            case DIVISION ->
+                generationRapportDivision( gest);
+
         }
         Logger.addLog(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
     }
@@ -50,7 +50,7 @@ public class GenerateurRapport {
         }
     }
 
-    private static void generationRapportDivision(String filtre, GestionPersonnel gest){
+    private static void generationRapportDivision(GestionPersonnel gest){
         HashMap<String, Integer> compteurDivisions = new HashMap<>();
         for (Employe emp : gest.getEmployes()) {
             String div = emp.getEquipe();
