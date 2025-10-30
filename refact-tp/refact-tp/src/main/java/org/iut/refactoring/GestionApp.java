@@ -19,6 +19,6 @@ class GestionApp {
         
         app.avancementEmploye(aliceId, "CHEF DE PROJET");
         
-        app.printLogs();
+        Logger.printLogs();
     }
 }

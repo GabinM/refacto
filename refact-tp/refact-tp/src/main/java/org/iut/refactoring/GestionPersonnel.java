@@ -7,7 +7,6 @@ public class GestionPersonnel {
     
     public ArrayList<Employe> employes = new ArrayList<>();
     public HashMap<String, Double> salairesEmployes = new HashMap<>();
-    public ArrayList<String> logs = new ArrayList<>();
     
     public void ajouteSalarie(String type, String nom, double salaireDeBase, int experience, String equipe) {
         Employe emp = new Employe(UUID.randomUUID().toString(), type, nom, salaireDeBase, experience, equipe);
@@ -15,23 +14,25 @@ public class GestionPersonnel {
         employes.add(emp);
         
         double salaireFinal = salaireDeBase;
-        if (type.equals(Employe.DEVELOPPEUR)) {
-            salaireFinal = salaireDeBase * 1.2;
-            if (experience > 5) {
-                salaireFinal = salaireFinal * 1.15;
+        switch (type) {
+            case Employe.DEVELOPPEUR -> {
+                salaireFinal = salaireDeBase * 1.2;
+                if (experience > 5) {
+                    salaireFinal = salaireFinal * 1.15;
+                }
             }
-        } else if (type.equals(Employe.CHEF_PROJET)) {
-            salaireFinal = salaireDeBase * 1.5;
-            if (experience > 3) {
-                salaireFinal = salaireFinal * 1.1;
+            case Employe.CHEF_PROJET -> {
+                salaireFinal = salaireDeBase * 1.5;
+                if (experience > 3) {
+                    salaireFinal = salaireFinal * 1.1;
+                }
             }
-        } else if (type.equals(Employe.STAGIAIRE)) {
-            salaireFinal = salaireDeBase * 0.6;
+            case Employe.STAGIAIRE -> salaireFinal = salaireDeBase * 0.6;
         }
         
         salairesEmployes.put(emp.getId(), salaireFinal);
         
-        logs.add(LocalDateTime.now() + " - Ajout de l'employé: " + nom);
+        Logger.addLog(LocalDateTime.now() + " - Ajout de l'employé: " + nom);
     }
     
     public double calculSalaire(String employeId) {
@@ -77,37 +78,41 @@ public class GestionPersonnel {
     
     public void generationRapport(String typeRapport, String filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
-        
-        if (typeRapport.equals("SALAIRE")) {
-            for (Employe emp : employes) {
-                if (filtre == null ||
-                    emp.getEquipe().equals(filtre)) {
-                    String id = emp.getId();
-                    String nom = emp.getNom();
-                    double salaire = calculSalaire(id);
-                    System.out.println(nom + ": " + salaire + " €");
+
+        switch (typeRapport) {
+            case "SALAIRE" -> {
+                for (Employe emp : employes) {
+                    if (filtre == null ||
+                            emp.getEquipe().equals(filtre)) {
+                        String id = emp.getId();
+                        String nom = emp.getNom();
+                        double salaire = calculSalaire(id);
+                        System.out.println(nom + ": " + salaire + " €");
+                    }
                 }
             }
-        } else if (typeRapport.equals("EXPERIENCE")) {
-            for (Employe emp : employes) {
-                if (filtre == null ||
-                    emp.getEquipe().equals(filtre)) {
-                    String nom = emp.getNom();
-                    int exp = emp.getExperience();
-                    System.out.println(nom + ": " + exp + " années");
+            case "EXPERIENCE" -> {
+                for (Employe emp : employes) {
+                    if (filtre == null ||
+                            emp.getEquipe().equals(filtre)) {
+                        String nom = emp.getNom();
+                        int exp = emp.getExperience();
+                        System.out.println(nom + ": " + exp + " années");
+                    }
                 }
             }
-        } else if (typeRapport.equals("DIVISION")) {
-            HashMap<String, Integer> compteurDivisions = new HashMap<>();
-            for (Employe emp : employes) {
-                String div = emp.getEquipe();
-                compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
-            }
-            for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
-                System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
+            case "DIVISION" -> {
+                HashMap<String, Integer> compteurDivisions = new HashMap<>();
+                for (Employe emp : employes) {
+                    String div = emp.getEquipe();
+                    compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
+                }
+                for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
+                }
             }
         }
-        logs.add(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
+        Logger.addLog(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
     }
     
     public void avancementEmploye(String employeId, String newType) {
@@ -119,7 +124,7 @@ public class GestionPersonnel {
                 double nouveauSalaire = calculSalaire(employeId);
                 salairesEmployes.put(employeId, nouveauSalaire);
                 
-                logs.add(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
+                Logger.addLog(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
                 System.out.println("Employé promu avec succès!");
                 return;
             }
@@ -137,13 +142,6 @@ public class GestionPersonnel {
         return resultat;
     }
     
-    public void printLogs() {
-        System.out.println("=== LOGS ===");
-        for (String log : logs) {
-            System.out.println(log);
-        }
-    }
-    
     public double calculBonusAnnuel(String employeId) {
         Employe emp = null;
         for (Employe e : employes) {
@@ -159,18 +157,20 @@ public class GestionPersonnel {
         double salaireDeBase = emp.getSalaireBase();
         
         double bonus = 0;
-        if (type.equals(Employe.DEVELOPPEUR)) {
-            bonus = salaireDeBase * 0.1;
-            if (experience > 5) {
-                bonus = bonus * 1.5;
+        switch (type) {
+            case Employe.DEVELOPPEUR -> {
+                bonus = salaireDeBase * 0.1;
+                if (experience > 5) {
+                    bonus = bonus * 1.5;
+                }
             }
-        } else if (type.equals(Employe.CHEF_PROJET)) {
-            bonus = salaireDeBase * 0.2;
-            if (experience > 3) {
-                bonus = bonus * 1.3;
+            case Employe.CHEF_PROJET -> {
+                bonus = salaireDeBase * 0.2;
+                if (experience > 3) {
+                    bonus = bonus * 1.3;
+                }
             }
-        } else if (type.equals(Employe.STAGIAIRE)) {
-            bonus = 0; // Pas de bonus
+            case Employe.STAGIAIRE -> bonus = 0; // Pas de bonus
         }
         return bonus;
     }
