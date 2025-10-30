@@ -76,45 +76,6 @@ public class GestionPersonnel {
         return salaireFinal;
     }
     
-    public void generationRapport(String typeRapport, String filtre) {
-        System.out.println("=== RAPPORT: " + typeRapport + " ===");
-
-        switch (typeRapport) {
-            case "SALAIRE" -> {
-                for (Employe emp : employes) {
-                    if (filtre == null ||
-                            emp.getEquipe().equals(filtre)) {
-                        String id = emp.getId();
-                        String nom = emp.getNom();
-                        double salaire = calculSalaire(id);
-                        System.out.println(nom + ": " + salaire + " €");
-                    }
-                }
-            }
-            case "EXPERIENCE" -> {
-                for (Employe emp : employes) {
-                    if (filtre == null ||
-                            emp.getEquipe().equals(filtre)) {
-                        String nom = emp.getNom();
-                        int exp = emp.getExperience();
-                        System.out.println(nom + ": " + exp + " années");
-                    }
-                }
-            }
-            case "DIVISION" -> {
-                HashMap<String, Integer> compteurDivisions = new HashMap<>();
-                for (Employe emp : employes) {
-                    String div = emp.getEquipe();
-                    compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
-                }
-                for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
-                    System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
-                }
-            }
-        }
-        Logger.addLog(LocalDateTime.now() + " - Rapport généré: " + typeRapport);
-    }
-    
     public void avancementEmploye(String employeId, String newType) {
         for (Employe emp : employes) {
             if (emp.getId().equals(employeId)) {
@@ -173,6 +134,10 @@ public class GestionPersonnel {
             case Employe.STAGIAIRE -> bonus = 0; // Pas de bonus
         }
         return bonus;
+    }
+
+    public List<Employe> getEmployes(){
+        return employes;
     }
 }
 
