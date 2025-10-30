@@ -6,14 +6,17 @@ public class Employe{
     public static final String CHEF_PROJET = "CHEF DE PROJET";
     public static final String STAGIAIRE = "STAGIAIRE";
 
+    public static final String IT = "IT";
+    public static final String RH = "RH";
+
     private final String id;
     private String type;
     private final String nom;
     private final double salaireBase;
     private int experience;
-    private final DivisionEmploye equipe;
+    private final String equipe;
 
-    public Employe(String id, String type, String nom, double salaireBase, int experience, DivisionEmploye equipe){
+    public Employe(String id, String type, String nom, double salaireBase, int experience, String equipe){
         this.id = id;
         this.type = type;
         this.nom = nom;
@@ -38,7 +41,7 @@ public class Employe{
     public int getExperience(){
         return experience;
     }
-    public DivisionEmploye getEquipe(){
+    public String getEquipe(){
         return equipe;
     }
     public void setType(String type){

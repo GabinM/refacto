@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.iut.refactoring.GestionPersonnelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-10-28T10:03:47.373Z" hostname="CR-3PE_M_G" time="0.096">
+<testsuite name="org.iut.refactoring.GestionPersonnelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-10-30T13:51:25.242Z" hostname="CR-3PE_M_G" time="0.103">
   <properties/>
-  <testcase name="test05_CalculeSalaireStagiaire()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.058"/>
-  <testcase name="test07_avancementEmployePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.008"/>
-  <testcase name="test04_CalculeSalaireChefProjet3ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test05_CalculeSalaireStagiaire()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.069"/>
+  <testcase name="test07_avancementEmployePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.007"/>
+  <testcase name="test04_CalculeSalaireChefProjet3ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
   <testcase name="test02_CalculeSalaireDev10ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
-  <testcase name="test06_CalculeSalairePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test06_CalculeSalairePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
   <testcase name="test00_CalculeSalaireDev()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
   <testcase name="test03_CalculeSalaireChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
-  <testcase name="test01_CalculeSalaireDev5ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test01_CalculeSalaireDev5ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
   <system-out><![CDATA[ERREUR: impossible de trouver l'employé
 ERREUR: impossible de trouver l'employé
 ]]></system-out>

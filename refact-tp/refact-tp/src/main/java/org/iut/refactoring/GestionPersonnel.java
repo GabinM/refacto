@@ -9,7 +9,7 @@ public class GestionPersonnel {
     public HashMap<String, Double> salairesEmployes = new HashMap<>();
     public ArrayList<String> logs = new ArrayList<>();
     
-    public void ajouteSalarie(String type, String nom, double salaireDeBase, int experience, DivisionEmploye equipe) {
+    public void ajouteSalarie(String type, String nom, double salaireDeBase, int experience, String equipe) {
         Employe emp = new Employe(UUID.randomUUID().toString(), type, nom, salaireDeBase, experience, equipe);
         
         employes.add(emp);
@@ -75,7 +75,7 @@ public class GestionPersonnel {
         return salaireFinal;
     }
     
-    public void generationRapport(String typeRapport, DivisionEmploye filtre) {
+    public void generationRapport(String typeRapport, String filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
         
         if (typeRapport.equals("SALAIRE")) {
@@ -98,12 +98,12 @@ public class GestionPersonnel {
                 }
             }
         } else if (typeRapport.equals("DIVISION")) {
-            HashMap<DivisionEmploye, Integer> compteurDivisions = new HashMap<>();
+            HashMap<String, Integer> compteurDivisions = new HashMap<>();
             for (Employe emp : employes) {
-                DivisionEmploye div = emp.getEquipe();
+                String div = emp.getEquipe();
                 compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
             }
-            for (Map.Entry<DivisionEmploye, Integer> entry : compteurDivisions.entrySet()) {
+            for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
             }
         }
@@ -127,7 +127,7 @@ public class GestionPersonnel {
         System.out.println("ERREUR: impossible de trouver l'employé");
     }
     
-    public ArrayList<Employe> getEmployesParDivision(DivisionEmploye division) {
+    public ArrayList<Employe> getEmployesParDivision(String division) {
         ArrayList<Employe> resultat = new ArrayList<>();
         for (Employe emp : employes) {
             if (emp.getEquipe().equals(division)) {
