@@ -15,43 +15,43 @@ public class GestionPersonnelTest {
 
     @Test
     public void test00_CalculeSalaireDev(){
-        app.ajouteSalarie("DEVELOPPEUR", "Alice", 50000, 1, "IT");
-        Assertions.assertEquals( 60000.0, app.calculSalaire(app.getEmployesParDivision("IT").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 50000, 1, DivisionEmploye.IT);
+        Assertions.assertEquals( 60000.0, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.IT).getFirst().getId()));
     }
 
     @Test
     public void test01_CalculeSalaireDev5ansExp(){
-        app.ajouteSalarie("DEVELOPPEUR", "Alice", 50000, 6, "IT");
-        Assertions.assertEquals( 69000.0, app.calculSalaire(app.getEmployesParDivision("IT").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 50000, 6, DivisionEmploye.IT);
+        Assertions.assertEquals( 69000.0, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.IT).getFirst().getId()));
     }
 
     @Test
     public void test02_CalculeSalaireDev10ansExp(){
-        app.ajouteSalarie("DEVELOPPEUR", "Alice", 50000, 10, "IT");
-        Assertions.assertEquals( 69000.0, app.calculSalaire(app.getEmployesParDivision("IT").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 50000, 10, DivisionEmploye.IT);
+        Assertions.assertEquals( 69000.0, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.IT).getFirst().getId()));
     }
 
     @Test
     public void test03_CalculeSalaireChefProjet(){
-        app.ajouteSalarie("CHEF DE PROJET", "Bob", 60000, 1, "RH");
-        Assertions.assertEquals(95000.0, app.calculSalaire(app.getEmployesParDivision("RH").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.CHEF_PROJET, "Bob", 60000, 1, DivisionEmploye.RH);
+        Assertions.assertEquals(95000.0, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.RH).getFirst().getId()));
     }
 
     @Test
     public void test04_CalculeSalaireChefProjet3ansExp(){
-        app.ajouteSalarie("CHEF DE PROJET", "Bob", 60000, 4, "RH");
-        Assertions.assertEquals(104000.00000000001, app.calculSalaire(app.getEmployesParDivision("RH").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.CHEF_PROJET, "Bob", 60000, 4, DivisionEmploye.RH);
+        Assertions.assertEquals(104000.00000000001, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.RH).getFirst().getId()));
     }
 
     @Test
     public void test05_CalculeSalaireStagiaire(){
-        app.ajouteSalarie("STAGIAIRE", "Charlie", 20000, 0, "IT");
-        Assertions.assertEquals(12000, app.calculSalaire(app.getEmployesParDivision("IT").getFirst()[0].toString()));
+        app.ajouteSalarie(Employe.STAGIAIRE, "Charlie", 20000, 0, DivisionEmploye.IT);
+        Assertions.assertEquals(12000, app.calculSalaire(app.getEmployesParDivision(DivisionEmploye.IT).getFirst().getId()));
     }
 
     @Test
     public void test06_CalculeSalairePasTrouve(){
-        app.ajouteSalarie("STAGIAIRE", "Charlie", 20000, 0, "IT");
+        app.ajouteSalarie(Employe.STAGIAIRE, "Charlie", 20000, 0, DivisionEmploye.IT);
         boolean error = false;
         try{
             app.calculSalaire("Jean-jérémy sanchez de la mancha");
@@ -65,10 +65,10 @@ public class GestionPersonnelTest {
 
     @Test
     public void test07_avancementEmployePasTrouve(){
-        app.ajouteSalarie("STAGIAIRE", "Charlie", 20000, 0, "IT");
+        app.ajouteSalarie(Employe.STAGIAIRE, "Charlie", 20000, 0, DivisionEmploye.IT);
         boolean error = false;
         try{
-            app.avancementEmploye("Jean-jérémy sanchez de la mancha", "général-gardien suprême de la serpillère");
+            app.avancementEmploye("Jean-jérémy sanchez de la mancha", Employe.DEVELOPPEUR);
         } catch (Exception e) {
             error = true;
         }

@@ -9,23 +9,23 @@ public class GestionPersonnel {
     public HashMap<String, Double> salairesEmployes = new HashMap<>();
     public ArrayList<String> logs = new ArrayList<>();
     
-    public void ajouteSalarie(String type, String nom, double salaireDeBase, int experience, String equipe) {
+    public void ajouteSalarie(String type, String nom, double salaireDeBase, int experience, DivisionEmploye equipe) {
         Employe emp = new Employe(UUID.randomUUID().toString(), type, nom, salaireDeBase, experience, equipe);
         
         employes.add(emp);
         
         double salaireFinal = salaireDeBase;
-        if (type.equals("DEVELOPPEUR")) {
+        if (type.equals(Employe.DEVELOPPEUR)) {
             salaireFinal = salaireDeBase * 1.2;
             if (experience > 5) {
                 salaireFinal = salaireFinal * 1.15;
             }
-        } else if (type.equals("CHEF DE PROJET")) {
+        } else if (type.equals(Employe.CHEF_PROJET)) {
             salaireFinal = salaireDeBase * 1.5;
             if (experience > 3) {
                 salaireFinal = salaireFinal * 1.1;
             }
-        } else if (type.equals("STAGIAIRE")) {
+        } else if (type.equals(Employe.STAGIAIRE)) {
             salaireFinal = salaireDeBase * 0.6;
         }
         
@@ -52,7 +52,7 @@ public class GestionPersonnel {
         int experience = emp.getExperience();
         
         double salaireFinal = salaireDeBase;
-        if (type.equals("DEVELOPPEUR")) {
+        if (type.equals(Employe.DEVELOPPEUR)) {
             salaireFinal = salaireDeBase * 1.2;
             if (experience > 5) {
                 salaireFinal = salaireFinal * 1.15;
@@ -60,13 +60,13 @@ public class GestionPersonnel {
             if (experience > 10) {
                 salaireFinal = salaireFinal * 1.05; // bonus
             }
-        } else if (type.equals("CHEF DE PROJET")) {
+        } else if (type.equals(Employe.CHEF_PROJET)) {
             salaireFinal = salaireDeBase * 1.5;
             if (experience > 3) {
                 salaireFinal = salaireFinal * 1.1;
             }
             salaireFinal = salaireFinal + 5000; // bonus
-        } else if (type.equals("STAGIAIRE")) {
+        } else if (type.equals(Employe.STAGIAIRE)) {
             salaireFinal = salaireDeBase * 0.6;
             // Pas de bonus pour les stagiaires
         } else {
@@ -75,12 +75,12 @@ public class GestionPersonnel {
         return salaireFinal;
     }
     
-    public void generationRapport(String typeRapport, String filtre) {
+    public void generationRapport(String typeRapport, DivisionEmploye filtre) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
         
         if (typeRapport.equals("SALAIRE")) {
             for (Employe emp : employes) {
-                if (filtre == null || filtre.isEmpty() || 
+                if (filtre == null ||
                     emp.getEquipe().equals(filtre)) {
                     String id = emp.getId();
                     String nom = emp.getNom();
@@ -90,7 +90,7 @@ public class GestionPersonnel {
             }
         } else if (typeRapport.equals("EXPERIENCE")) {
             for (Employe emp : employes) {
-                if (filtre == null || filtre.isEmpty() || 
+                if (filtre == null ||
                     emp.getEquipe().equals(filtre)) {
                     String nom = emp.getNom();
                     int exp = emp.getExperience();
@@ -98,12 +98,12 @@ public class GestionPersonnel {
                 }
             }
         } else if (typeRapport.equals("DIVISION")) {
-            HashMap<String, Integer> compteurDivisions = new HashMap<>();
+            HashMap<DivisionEmploye, Integer> compteurDivisions = new HashMap<>();
             for (Employe emp : employes) {
-                String div = emp.getEquipe();
+                DivisionEmploye div = emp.getEquipe();
                 compteurDivisions.put(div, compteurDivisions.getOrDefault(div, 0) + 1);
             }
-            for (Map.Entry<String, Integer> entry : compteurDivisions.entrySet()) {
+            for (Map.Entry<DivisionEmploye, Integer> entry : compteurDivisions.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue() + " employés");
             }
         }
@@ -127,7 +127,7 @@ public class GestionPersonnel {
         System.out.println("ERREUR: impossible de trouver l'employé");
     }
     
-    public ArrayList<Employe> getEmployesParDivision(String division) {
+    public ArrayList<Employe> getEmployesParDivision(DivisionEmploye division) {
         ArrayList<Employe> resultat = new ArrayList<>();
         for (Employe emp : employes) {
             if (emp.getEquipe().equals(division)) {
@@ -159,17 +159,17 @@ public class GestionPersonnel {
         double salaireDeBase = emp.getSalaireBase();
         
         double bonus = 0;
-        if (type.equals("DEVELOPPEUR")) {
+        if (type.equals(Employe.DEVELOPPEUR)) {
             bonus = salaireDeBase * 0.1;
             if (experience > 5) {
                 bonus = bonus * 1.5;
             }
-        } else if (type.equals("CHEF DE PROJET")) {
+        } else if (type.equals(Employe.CHEF_PROJET)) {
             bonus = salaireDeBase * 0.2;
             if (experience > 3) {
                 bonus = bonus * 1.3;
             }
-        } else if (type.equals("STAGIAIRE")) {
+        } else if (type.equals(Employe.STAGIAIRE)) {
             bonus = 0; // Pas de bonus
         }
         return bonus;
