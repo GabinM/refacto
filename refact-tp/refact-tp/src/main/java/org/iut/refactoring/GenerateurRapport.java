@@ -6,17 +6,21 @@ import java.util.Map;
 
 public class GenerateurRapport {
 
+    public final static String SALAIRE = "SALAIRE";
+    public final static String EXPERIENCE = "EXPERIENCE";
+    public final static String DIVISION = "DIVISION";
+
     public static void generationRapport(String typeRapport, String filtre, GestionPersonnel gest) {
         System.out.println("=== RAPPORT: " + typeRapport + " ===");
 
         switch (typeRapport) {
-            case "SALAIRE" -> {
+            case SALAIRE -> {
                 generationRapportSalaire(filtre, gest);
             }
-            case "EXPERIENCE" -> {
+            case EXPERIENCE -> {
                 generationRapportExperience(filtre, gest);
             }
-            case "DIVISION" -> {
+            case DIVISION -> {
                 generationRapportDivision(filtre, gest);
             }
         }
