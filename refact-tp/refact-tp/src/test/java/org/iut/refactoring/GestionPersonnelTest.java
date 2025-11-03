@@ -76,4 +76,48 @@ public class GestionPersonnelTest {
             throw new RuntimeException("la méthode ne devrait pas renvoyer d'erreur");
         }
     }
+
+    @Test
+    public void test08_CalculeBonusDev(){
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 50000, 1, Employe.IT);
+        Assertions.assertEquals( 5000.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.IT).getFirst().getId()));
+    }
+
+    @Test
+    public void test09_CalculeBonusDev5ansExp(){
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 50000, 6, Employe.IT);
+        Assertions.assertEquals( 7500.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.IT).getFirst().getId()));
+    }
+
+    @Test
+    public void test08_CalculeBonusChefProjet(){
+        app.ajouteSalarie(Employe.CHEF_PROJET, "Alice", 50000, 1, Employe.RH);
+        Assertions.assertEquals( 10000.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.RH).getFirst().getId()));
+    }
+
+    @Test
+    public void test09_CalculeBonusChefProjet3ansExp(){
+        app.ajouteSalarie(Employe.CHEF_PROJET, "Alice", 50000, 4, Employe.RH);
+        Assertions.assertEquals( 13000.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.RH).getFirst().getId()));
+    }
+
+    @Test
+    public void test10_CalculeBonusStagiaire(){
+        app.ajouteSalarie(Employe.STAGIAIRE, "Alice", 50000, 1, Employe.IT);
+        Assertions.assertEquals( 0.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.IT).getFirst().getId()));
+    }
+
+    @Test
+    public void test11_CalculeSalaireDevPromuChefProjet(){
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 60000, 1, Employe.IT);
+        app.avancementEmploye(app.getEmployesParDivision(Employe.IT).getFirst().getId(), Employe.CHEF_PROJET);
+        Assertions.assertEquals(95000.0, app.calculSalaire(app.getEmployesParDivision(Employe.IT).getFirst().getId()));
+    }
+
+    @Test
+    public void test12_CalculeBonusDevPromuChefProjet(){
+        app.ajouteSalarie(Employe.DEVELOPPEUR, "Alice", 60000, 1, Employe.IT);
+        app.avancementEmploye(app.getEmployesParDivision(Employe.IT).getFirst().getId(), Employe.CHEF_PROJET);
+        Assertions.assertEquals(12000.0, app.calculBonusAnnuel(app.getEmployesParDivision(Employe.IT).getFirst().getId()));
+    }
 }

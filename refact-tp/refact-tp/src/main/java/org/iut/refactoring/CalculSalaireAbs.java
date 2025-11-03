@@ -8,6 +8,8 @@ public abstract class CalculSalaireAbs {
         this.emp = emp;
     }
 
+    abstract double calculBonusAnnuel();
+
     abstract double calculSalaire();
 
     abstract double calculSalaireIntermediaire();

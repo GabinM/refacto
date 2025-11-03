@@ -7,6 +7,16 @@ public class CalculSalaireChefProjet extends CalculSalaireAbs {
     }
 
     @Override
+    double calculBonusAnnuel() {
+        double bonus = emp.getSalaireBase() * 0.2;
+        if (emp.getExperience() > 3) {
+            bonus = bonus * 1.3;
+        }
+        return bonus;
+    }
+
+
+    @Override
     public double calculSalaire() {
         double salaireFinal = emp.getSalaireBase() * 1.5;
         if (emp.getExperience() > 3) {

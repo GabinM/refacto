@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.iut.refactoring.GestionPersonnelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-10-30T15:36:38.931Z" hostname="CR-3PE_M_G" time="0.102">
+<testsuite name="org.iut.refactoring.GestionPersonnelTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2025-10-30T16:01:35.632Z" hostname="CR-3PE_M_G" time="0.121">
   <properties/>
-  <testcase name="test05_CalculeSalaireStagiaire()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.063"/>
-  <testcase name="test07_avancementEmployePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.007"/>
-  <testcase name="test04_CalculeSalaireChefProjet3ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test05_CalculeSalaireStagiaire()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.059"/>
+  <testcase name="test07_avancementEmployePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.008"/>
+  <testcase name="test08_CalculeBonusChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test09_CalculeBonusDev5ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test09_CalculeBonusChefProjet3ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.001"/>
+  <testcase name="test04_CalculeSalaireChefProjet3ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
+  <testcase name="test12_CalculeBonusDevPromuChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test11_CalculeSalaireDevPromuChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test08_CalculeBonusDev()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.001"/>
   <testcase name="test02_CalculeSalaireDev10ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
-  <testcase name="test06_CalculeSalairePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test06_CalculeSalairePasTrouve()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
   <testcase name="test00_CalculeSalaireDev()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
-  <testcase name="test03_CalculeSalaireChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
+  <testcase name="test03_CalculeSalaireChefProjet()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
   <testcase name="test01_CalculeSalaireDev5ansExp()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.003"/>
+  <testcase name="test10_CalculeBonusStagiaire()" classname="org.iut.refactoring.GestionPersonnelTest" time="0.002"/>
   <system-out><![CDATA[ERREUR: impossible de trouver l'employé
+Employé promu avec succès!
+Employé promu avec succès!
 ERREUR: impossible de trouver l'employé
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

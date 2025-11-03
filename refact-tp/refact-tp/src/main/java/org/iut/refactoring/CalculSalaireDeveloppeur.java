@@ -7,6 +7,15 @@ public class CalculSalaireDeveloppeur extends CalculSalaireAbs {
     }
 
     @Override
+    double calculBonusAnnuel() {
+        double bonus = emp.getSalaireBase() * 0.1;
+        if (emp.getExperience() > 5) {
+            bonus = bonus * 1.5;
+        }
+        return bonus;
+    }
+
+    @Override
     public double calculSalaire() {
         double salaireFinal = emp.getSalaireBase() * 1.2;
         int experience = emp.getExperience();

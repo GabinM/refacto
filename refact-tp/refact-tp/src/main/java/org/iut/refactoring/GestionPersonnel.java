@@ -51,7 +51,16 @@ public class GestionPersonnel {
 
                 double nouveauSalaire = calculSalaire(employeId);
                 salairesEmployes.put(employeId, nouveauSalaire);
-                
+
+                switch(emp.getType()){
+                    case Employe.DEVELOPPEUR ->
+                        emp.setCalculSalaire(new CalculSalaireDeveloppeur(emp));
+                    case Employe.CHEF_PROJET ->
+                        emp.setCalculSalaire(new CalculSalaireChefProjet(emp));
+                    case Employe.STAGIAIRE ->
+                        emp.setCalculSalaire(new CalculSalaireStagiaire(emp));
+                }
+
                 Logger.addLog(LocalDateTime.now() + " - Employé promu: " + emp.getNom());
                 System.out.println("Employé promu avec succès!");
                 return;
@@ -85,22 +94,7 @@ public class GestionPersonnel {
         double salaireDeBase = emp.getSalaireBase();
         
         double bonus = 0;
-        switch (type) {
-            case Employe.DEVELOPPEUR -> {
-                bonus = salaireDeBase * 0.1;
-                if (experience > 5) {
-                    bonus = bonus * 1.5;
-                }
-            }
-            case Employe.CHEF_PROJET -> {
-                bonus = salaireDeBase * 0.2;
-                if (experience > 3) {
-                    bonus = bonus * 1.3;
-                }
-            }
-            case Employe.STAGIAIRE -> bonus = 0; // Pas de bonus
-        }
-        return bonus;
+        return emp.getCalculSalaire().calculBonusAnnuel();
     }
 
     public List<Employe> getEmployes(){

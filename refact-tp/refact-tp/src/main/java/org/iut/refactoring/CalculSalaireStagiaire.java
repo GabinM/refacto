@@ -7,6 +7,11 @@ public class CalculSalaireStagiaire extends CalculSalaireAbs {
     }
 
     @Override
+    double calculBonusAnnuel() {
+        return 0;
+    }
+
+    @Override
     public double calculSalaire() {
         return emp.getSalaireBase() *0.6;
     }
